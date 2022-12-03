@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components"
+import {useNavigate } from "react-router-dom"
 
 import kodimon_1 from "../assets/kodimon 1.png";
 import logo from "../assets/Kodi-logo.svg";
@@ -38,11 +39,18 @@ const StartPage_style = styled.div`
 
 `
 const StartPage = () => {
+
+  const navigate = useNavigate();
+
   return (
     <StartPage_style>
         <img className="flex-item kodimon_logo" src={logo} alt="logo" />
         <img className="flex-item kodimon_text"src={kodimon_1} alt="logo-text"/>
-        <Button className="flex-item start_button" children={"New Game"}/>
+        <Button className="flex-item start_button" 
+                children={"New Game"} 
+                onClick={()=>{
+                  navigate("/battle");
+                }}/>
     </StartPage_style>
   )
 }
