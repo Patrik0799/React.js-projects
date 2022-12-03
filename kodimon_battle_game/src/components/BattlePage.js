@@ -1,8 +1,12 @@
 import React from 'react'
 
+import PokemonCard from "./PokemonCard/PokemonCard";
+
 const BattlePage = () => {
   return (
-    <div>Welcome to the battle page</div>
+    <div>
+      <PokemonCard />
+    </div>
   )
 }
 

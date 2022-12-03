@@ -6,6 +6,25 @@ import kodimon_1 from "../assets/kodimon 1.png";
 import logo from "../assets/Kodi-logo.svg";
 import Button from './Button/Button'
 
+const StartPage = () => {
+
+  const navigate = useNavigate();
+
+  return (
+    <StartPage_style>
+        <img className="flex-item kodimon_logo" src={logo} alt="logo" />
+        <img className="flex-item kodimon_text"src={kodimon_1} alt="logo-text"/>
+        <Button className="flex-item start_button" 
+                children={"New Game"} 
+                onClick={()=>{
+                  navigate("/battle");
+                }}/>
+    </StartPage_style>
+  )
+}
+
+export default StartPage
+
 const StartPage_style = styled.div`
   
   height: 700px;
@@ -38,21 +57,3 @@ const StartPage_style = styled.div`
   }
 
 `
-const StartPage = () => {
-
-  const navigate = useNavigate();
-
-  return (
-    <StartPage_style>
-        <img className="flex-item kodimon_logo" src={logo} alt="logo" />
-        <img className="flex-item kodimon_text"src={kodimon_1} alt="logo-text"/>
-        <Button className="flex-item start_button" 
-                children={"New Game"} 
-                onClick={()=>{
-                  navigate("/battle");
-                }}/>
-    </StartPage_style>
-  )
-}
-
-export default StartPage
