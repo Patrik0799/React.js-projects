@@ -26,8 +26,8 @@ class BattlePage extends React.Component{
   }*/
 
   componentDidMount() {
-    this.props.fetchPokemon1(60);
-    this.props.fetchPokemon2(27);
+    this.props.fetchPokemon1(77);
+    this.props.fetchPokemon2(3);
     //this.randomTwoNumbers;
   }
 
@@ -40,9 +40,12 @@ class BattlePage extends React.Component{
     console.log(this.props.pokemon.name);
     console.log(this.props.pokemon2.name);
 
-    if(!this.props.pokemon2.name){
+    if(!this.props.pokemon2.name || !this.props.pokemon.name){
       return null;
     }
+
+
+
     return (
       <BattlePageComponent>
         <div className='battle-pokemon'>
