@@ -20,4 +20,5 @@ const ButtonComponent = styled.button`
   width: 200px;
   height: 50px;
   cursor: pointer;
+  margin-bottom: 10px;
 `

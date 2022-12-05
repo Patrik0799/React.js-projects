@@ -1,5 +1,8 @@
 import { combineReducers } from "redux";
+import pokemonReducer from "./pokemonReducer";
+import pokemonReducer2 from "./pokemonReducer2";
 
 export default combineReducers({
-    replaceMe: () => "hi"
+    pokemon: pokemonReducer,
+    pokemon2: pokemonReducer2
 })
