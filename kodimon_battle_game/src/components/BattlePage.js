@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard/PokemonCard";
 import ArrowCard from './arrowCard.js/ArrowCard';
@@ -6,65 +6,54 @@ import Button from './Button/Button';
 
 import { connect } from "react-redux";
 import { fetchPokemon1, fetchPokemon2 } from '../actions';
-import { bindActionCreators } from 'redux';
 
-class BattlePage extends React.Component{
+const BattlePage = ({
+  pokemon, 
+  pokemon2, 
+  fetchPokemon1, 
+  fetchPokemon2
+  }) =>{
 
-  state = {
-    randID: []
+  //ovo je islo u componentDidMount()
+  useEffect(()=> {
+    fetchPokemon1(Math.floor(Math.random() * (600 - 1) + 1));
+    fetchPokemon2(Math.floor(Math.random() * (600 - 1) + 1));
+  }, [])
+
+  //Ovih par linija je islo u render(){} prije returna
+  console.log(pokemon.name);
+  console.log(pokemon2.name);
+
+  if(!pokemon2.name || !pokemon.name){
+    return null;
   }
-
-  /*randomTwoNumbers = () =>{
-    const random = []
-    for(let i = 0; i < 2; i++){
-      random.push(Math.floor(Math.random() * (600 - 1) + 1))
-    }
-
-    return this.setState({
-      randID: random
-    })
-  }*/
-
-  componentDidMount() {
-    this.props.fetchPokemon1(77);
-    this.props.fetchPokemon2(3);
-    //this.randomTwoNumbers;
-  }
-
-  render(){
-    {/*console.log(this.props.pokemon.name);
-
-    if(!this.props.pokemon.name){
-      return null;
-    }*/}
-    console.log(this.props.pokemon.name);
-    console.log(this.props.pokemon2.name);
-
-    if(!this.props.pokemon2.name || !this.props.pokemon.name){
-      return null;
-    }
-
-
 
     return (
       <BattlePageComponent>
         <div className='battle-pokemon'>
           <PokemonCard 
-            name = {this.props.pokemon.name.charAt(0).toUpperCase() + this.props.pokemon.name.slice(1).toLowerCase()}
-            image = {this.props.pokemon.sprites.other.dream_world.front_default}
-            hp = {this.props.pokemon.stats[0].base_stat}
-            attack = {this.props.pokemon.stats[1].base_stat}
-            defence = {this.props.pokemon.stats[2].base_stat}
-            speed = {this.props.pokemon.stats[5].base_stat}
+            name = {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).toLowerCase()}
+            image = {pokemon.sprites.other.dream_world.front_default}
+            hp = {pokemon.stats[0].base_stat}
+            attack = {pokemon.stats[1].base_stat}
+            defence = {pokemon.stats[2].base_stat}
+            speed = {pokemon.stats[5].base_stat}
           />
-          <ArrowCard />
+          <ArrowCard 
+            LeftPokemonSpeed={pokemon.stats[5].base_stat} 
+            RightPokemonSpeed={pokemon2.stats[5].base_stat}
+            LeftPokemonAttack={pokemon.stats[1].base_stat}
+            RightPokemonAttack={pokemon2.stats[1].base_stat}
+            LeftPokemonDefence={pokemon.stats[2].base_stat}
+            RightPokemonDefence={pokemon2.stats[2].base_stat}
+          />
           <PokemonCard 
-            name = {this.props.pokemon2.name.charAt(0).toUpperCase() + this.props.pokemon2.name.slice(1).toLowerCase()}
-            image = {this.props.pokemon2.sprites.other.dream_world.front_default}
-            hp = {this.props.pokemon2.stats[0].base_stat}
-            attack = {this.props.pokemon2.stats[1].base_stat}
-            defence = {this.props.pokemon2.stats[2].base_stat}
-            speed = {this.props.pokemon2.stats[5].base_stat}
+            name = {pokemon2.name.charAt(0).toUpperCase() + pokemon2.name.slice(1).toLowerCase()}
+            image = {pokemon2.sprites.other.dream_world.front_default}
+            hp = {pokemon2.stats[0].base_stat}
+            attack = {pokemon2.stats[1].base_stat}
+            defence = {pokemon2.stats[2].base_stat}
+            speed = {pokemon2.stats[5].base_stat}
           />
         </div>
         <div className='menu-logs'>
@@ -80,14 +69,13 @@ class BattlePage extends React.Component{
           <div className='battle-logs'>
             <h3 className='battle-text'>Logs</h3>
             <div className='logs default-border'>
-              HELLO
+              {pokemon2.name}
             </div>
           </div>
         </div>
 
       </BattlePageComponent>
     )
-  }
 }
 
 const mapStateToProps = (state) =>{
