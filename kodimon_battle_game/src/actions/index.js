@@ -32,14 +32,45 @@ export const setToRightPokemon = () => {
     }
 }
 
-export const setLeftPokemonHP = () => {
+export const initialSetLeftPokemonHP = (initialHP) => {
     return{
-        type: "SET_LEFT_HP"
+        type: "INITIAL_SET_LEFT_HP",
+        payload: initialHP
     }
 }
 
-export const setRightPokemonHP = () => {
+export const newSetLeftPokemonHP = (dmg) => {
     return{
-        type: "SET_RIGHT_HP"
+        type: "SET_NEW_LEFT_HP",
+        payload: dmg
     }
 }
+
+export const initialSetRightPokemonHP = (initialHP) => {
+    return{
+        type: "INITIAL_SET_RIGHT_HP",
+        payload: initialHP
+    }
+}
+
+export const newSetRightPokemonHP = (dmg) => {
+    return {
+        type: "SET_NEW_RIGHT_HP",
+        payload: dmg
+    }
+}
+
+export const logTo1 = (num) =>{
+    return{
+        type: "LOG_INC",
+        payload: num
+    }
+}
+
+export const logTo2 = (num) =>{
+    return{
+        type: "LOG_DEC",
+        payload: num
+    }
+}
+

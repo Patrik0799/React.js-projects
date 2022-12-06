@@ -1,4 +1,4 @@
-export default (state = 0, action) =>{
+export default (state = null, action) =>{
     switch(action.type){
         case "SET_LEFT":
             return 0;

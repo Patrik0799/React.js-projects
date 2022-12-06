@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard/PokemonCard";
 import ArrowCard from './arrowCard.js/ArrowCard';
-import Button from './Button/Button';
+import LogWindow from './LogWindow/LogWindow';
+import BattleMenu from './BattleMenu/BattleMenu';
 
 import { connect } from "react-redux";
 import { fetchPokemon1, fetchPokemon2 } from '../actions';
@@ -46,6 +47,8 @@ const BattlePage = ({
             RightPokemonAttack={pokemon2.stats[1].base_stat}
             LeftPokemonDefence={pokemon.stats[2].base_stat}
             RightPokemonDefence={pokemon2.stats[2].base_stat}
+            LeftPokemonHP={pokemon.stats[0].base_stat}
+            RightPokemonHP={pokemon2.stats[0].base_stat}
           />
           <PokemonCard 
             name = {pokemon2.name.charAt(0).toUpperCase() + pokemon2.name.slice(1).toLowerCase()}
@@ -57,23 +60,13 @@ const BattlePage = ({
           />
         </div>
         <div className='menu-logs'>
-          <div className='battle-menu'>
-            <h3 className='battle-text' >Menu</h3>
-            <div className='battle-menu-buttons default-border'>
-              <Button className="item-button" children={"Home"}/>
-              <Button className="item-button" children={"New Game"}/>
-              <Button className="item-button" children={"New opponent"}/>
-            </div>
-          </div>
-        <div></div>
-          <div className='battle-logs'>
-            <h3 className='battle-text'>Logs</h3>
-            <div className='logs default-border'>
-              {pokemon2.name}
-            </div>
-          </div>
+          <BattleMenu />
+          <div></div>
+          <LogWindow 
+            LeftPokemonName={pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).toLowerCase()} 
+            RightPokemonName={pokemon2.name.charAt(0).toUpperCase() + pokemon2.name.slice(1).toLowerCase()}
+          />
         </div>
-
       </BattlePageComponent>
     )
 }
@@ -101,39 +94,6 @@ const BattlePageComponent = styled.div `
   .menu-logs {
     display: flex;
     justify-content: space-around;
-  }
-
-  /* MENU WINDOW */
-
-  .battle-menu {
-    background-color: green;
-    width: 230px;
-    height: 265px;
-    margin-top:40px;
-  }
-
-  .battle-menu-buttons {
-    padding-top: 20px;
-    padding-bottom: 10px;
-  }
-
-  .battle-menu-buttons {
-    text-align:center;
-  }
-
-  /*LOGS WINDOW*/
-
-  .battle-logs {
-    background-color: purple;
-    height: 305px;
-    width: 550px;
-    margin-top: 10px;
-  }
-
-  .logs {
-    height: 240px;
-    padding-top: 10px;
-    padding-left: 10px;
   }
 
   /* MUTUAL */
