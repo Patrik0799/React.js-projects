@@ -3,7 +3,7 @@ export default (state = 0, action) => {
         case "INITIAL_SET_RIGHT_HP" :
             return action.payload.toFixed(2)
         case "SET_NEW_RIGHT_HP" : {
-            if((state - action.payload) <= 0){
+            if((state - action.payload) < 0){
                 return 0
             }
             else {

@@ -12,7 +12,9 @@ const BattlePage = ({
   pokemon, 
   pokemon2, 
   fetchPokemon1, 
-  fetchPokemon2
+  fetchPokemon2,
+  pokemonHP,
+  pokemon2HP
   }) =>{
 
   //ovo je islo u componentDidMount()
@@ -33,6 +35,7 @@ const BattlePage = ({
       <BattlePageComponent>
         <div className='battle-pokemon'>
           <PokemonCard 
+            HP = {pokemonHP}
             name = {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).toLowerCase()}
             image = {pokemon.sprites.other.dream_world.front_default}
             hp = {pokemon.stats[0].base_stat}
@@ -51,6 +54,7 @@ const BattlePage = ({
             RightPokemonHP={pokemon2.stats[0].base_stat}
           />
           <PokemonCard 
+            HP = {pokemon2HP}
             name = {pokemon2.name.charAt(0).toUpperCase() + pokemon2.name.slice(1).toLowerCase()}
             image = {pokemon2.sprites.other.dream_world.front_default}
             hp = {pokemon2.stats[0].base_stat}
@@ -74,7 +78,9 @@ const BattlePage = ({
 const mapStateToProps = (state) =>{
   return {
     pokemon: state.pokemon,
-    pokemon2: state.pokemon2
+    pokemon2: state.pokemon2,
+    pokemonHP: state.pokemonHP,
+    pokemon2HP: state.pokemon2HP
   }
 }
 

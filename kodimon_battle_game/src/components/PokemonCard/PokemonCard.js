@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
 
-const PokemonCard = ({name, image, hp, attack, defence, speed}) => {
+const PokemonCard = ({name, image, hp, attack, defence, speed, HP}) => {
         return (
             <PokemonCardComponent>
                 <div className='pokemon'>
-                    <div>HEALTH</div>
+                    <div>{HP}</div>
                     <div>HEALTH BAR</div>
                     <h1>{name}</h1>
                     <img src={image} alt=''/>

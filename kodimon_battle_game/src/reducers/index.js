@@ -7,6 +7,8 @@ import pokemon2HP from "./pokemon2HP";
 import damageReducer from "./damageReducer";
 import damageReducer2 from "./damageReducer2";
 import logReducer from "./logReducer";
+import missReducer from "./missReducer";
+import counterReducer from "./counterReducer";
 
 export default combineReducers({
     pokemon: pokemonReducer,
@@ -16,5 +18,7 @@ export default combineReducers({
     pokemon2HP: pokemon2HP,
     rightToleftDMG: damageReducer,
     leftTorightDMG: damageReducer2,
-    logAdd: logReducer
+    logAdd: logReducer,
+    miss: missReducer,
+    counter: counterReducer
 })

@@ -4,7 +4,7 @@ import Arrow from "../../assets/arrow.svg";
 import Button from "../Button/Button";
 
 import { connect } from 'react-redux';
-import { setToLeftPokemon, setToRightPokemon, initialSetLeftPokemonHP, newSetLeftPokemonHP, initialSetRightPokemonHP, newSetRightPokemonHP, logTo1, logTo2 } from '../../actions';
+import { setToLeftPokemon, setToRightPokemon, initialSetLeftPokemonHP, newSetLeftPokemonHP, initialSetRightPokemonHP, newSetRightPokemonHP, logTo1, logTo2, initialLeftToRightDMG, initialRightToLeftDMG, setMissed, setCounter } from '../../actions';
 
 const ArrowCard = ({
   LeftPokemonSpeed, 
@@ -25,8 +25,15 @@ const ArrowCard = ({
   pokemonHP,
   pokemon2HP,
   logTo1,
-  logTo2
+  logTo2,
+  initialLeftToRightDMG,
+  initialRightToLeftDMG,
+  miss,
+  setMissed,
+  setCounter,
+  counter
   }) => {
+
 
   useEffect(() =>{
 
@@ -37,9 +44,13 @@ const ArrowCard = ({
       setToLeftPokemon();
     }
 
+    logTo1(1);
     initialSetLeftPokemonHP(LeftPokemonHP);
     initialSetRightPokemonHP(RightPokemonHP);
 
+    initialRightToLeftDMG(damageCalculator(RightPokemonAttack, LeftPokemonDefence));
+    initialLeftToRightDMG(damageCalculator(LeftPokemonAttack, RightPokemonDefence));
+    
   }, [])
 
   const damageCalculator = (attack, defence) =>{
@@ -48,31 +59,37 @@ const ArrowCard = ({
     const toMissNumber = Math.floor(Math.random() * (5 - 1 + 1) + 1);
     let damageDealt = (ATT - DEF/100 * ATT).toFixed(2);
 
-    if(damageDealt < 0 || toMissNumber == 1){
+    if(damageDealt < 0){
+      damageDealt = 0;
+    }else if(toMissNumber == 1){
+      setMissed(1);
       damageDealt = 0;
     }
+    
+    setMissed(0);
     return damageDealt
+    
   }
 
+  {/*LIJEVI NAPADA DESNOM*/}
   const RightAttacksLeft = () => {
-    {/*LIJEVI NAPADA DESNOM*/}
-
-    const damageDealtToLeft = damageCalculator(RightPokemonAttack, LeftPokemonDefence);
     
-    setToRightPokemon();
-    logTo1(1);
+    const damageDealtToLeft = damageCalculator(RightPokemonAttack, LeftPokemonDefence);
     newSetLeftPokemonHP(damageDealtToLeft);
+    setToRightPokemon();
+    logTo1(2);
+    setCounter();
     //console.log(damageDealtToLeft);
   }
 
+  {/*DESNI NAPADA LIJEVOG*/}
   const LeftAttacksRight = () => {
-    {/*DESNI NAPADA LIJEVOG*/}
 
     const damageDealtToRight = damageCalculator(LeftPokemonAttack, RightPokemonDefence);
-
-    setToLeftPokemon();
-    logTo2(2);
     newSetRightPokemonHP(damageDealtToRight);
+    setToLeftPokemon();
+    logTo2(3);
+    setCounter();
     //console.log(damageDealtToRight);
   }
 
@@ -90,10 +107,25 @@ const ArrowCard = ({
     return{
       direction: state.direction,
       pokemonHP: state.pokemonHP,
-      pokemon2HP: state.pokemon2HP
+      pokemon2HP: state.pokemon2HP,
+      miss: state.miss,
+      counter: state.counter
     }
   } 
-export default connect(mapStateToProps, {setToLeftPokemon, setToRightPokemon, initialSetLeftPokemonHP, newSetLeftPokemonHP, initialSetRightPokemonHP, newSetRightPokemonHP, logTo1, logTo2})(ArrowCard)
+export default connect(mapStateToProps,
+   {setToLeftPokemon, 
+    setToRightPokemon, 
+    initialSetLeftPokemonHP, 
+    newSetLeftPokemonHP, 
+    initialSetRightPokemonHP, 
+    newSetRightPokemonHP, 
+    logTo1, 
+    logTo2, 
+    initialLeftToRightDMG, 
+    initialRightToLeftDMG,
+    setMissed,
+    setCounter
+  })(ArrowCard)
 
 const ArrowCardComponent = styled.div `
     background-color: yellow;

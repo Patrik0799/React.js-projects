@@ -74,3 +74,30 @@ export const logTo2 = (num) =>{
     }
 }
 
+export const initialRightToLeftDMG = (dmg) => {
+    return{
+        type: "INITIAL_R_TO_L_DMG",
+        payload: dmg
+    }
+}
+
+export const initialLeftToRightDMG = (dmg) => {
+    return {
+        type: "INITIAL_L_TO_R_DMG",
+        payload: dmg
+    }
+}
+
+export const setMissed = (value) =>{
+    return{
+        type: "SET_MISS",
+        payload: value
+    }
+}
+
+export const setCounter = () => {
+    return {
+        type: "SET_COUNTER"
+    }
+}
+

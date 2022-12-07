@@ -1,4 +1,4 @@
-export default (state = 0, action) => {
+export default (state = [], action) => {
     switch(action.type){
         case "LOG_INC":
             return action.payload
