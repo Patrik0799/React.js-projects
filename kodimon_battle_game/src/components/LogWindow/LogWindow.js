@@ -129,7 +129,7 @@ export default connect(mapStateToProps)(LogWindow)
 
 const LogsWindowComponent = styled.div`
 
-    background-color: purple;
+    //background-color: purple;
     height: 305px;
     width: 550px;
     margin-top: 10px;

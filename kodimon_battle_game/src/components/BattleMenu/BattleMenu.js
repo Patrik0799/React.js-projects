@@ -19,11 +19,10 @@ export default BattleMenu
 
 const BattleMenuComponent = styled.div`
 
-    background-color: green;
+    //background-color: green;
     width: 230px;
     height: 265px;
     margin-top:40px;
-  
 
   .battle-menu-buttons {
     padding-top: 20px;

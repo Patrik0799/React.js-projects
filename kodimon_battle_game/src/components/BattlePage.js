@@ -4,6 +4,7 @@ import PokemonCard from "./PokemonCard/PokemonCard";
 import ArrowCard from './arrowCard.js/ArrowCard';
 import LogWindow from './LogWindow/LogWindow';
 import BattleMenu from './BattleMenu/BattleMenu';
+import PopUp from './PopUp/PopUp';
 
 import { connect } from "react-redux";
 import { fetchPokemon1, fetchPokemon2 } from '../actions';
@@ -64,13 +65,20 @@ const BattlePage = ({
           />
         </div>
         <div className='menu-logs'>
-          <BattleMenu />
+          {(pokemonHP == 0 || pokemon2HP == 0) ? <div></div> : <BattleMenu />}
           <div></div>
           <LogWindow 
             LeftPokemonName={pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).toLowerCase()} 
             RightPokemonName={pokemon2.name.charAt(0).toUpperCase() + pokemon2.name.slice(1).toLowerCase()}
           />
+          {(pokemonHP == 0 || pokemon2HP == 0) ? <div></div> : ""}
+          {(pokemonHP == 0 || pokemon2HP == 0) ? <div></div> : ""}
         </div>
+        <PopUp pokemonHP={pokemonHP}
+               pokemon2HP={pokemon2HP} 
+               pokemonName={pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).toLowerCase()}
+               pokemon2Name={pokemon2.name.charAt(0).toUpperCase() + pokemon2.name.slice(1).toLowerCase()}
+        />
       </BattlePageComponent>
     )
 }

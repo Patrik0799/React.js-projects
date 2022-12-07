@@ -24,7 +24,7 @@ const PokemonCard = ({name, image, hp, attack, defence, speed, HP}) => {
 export default PokemonCard
 
 const PokemonCardComponent = styled.div `
-    background-color: blue;
+    //background-color: blue;
     width: 250px;
     height: 405px;
     font-family: Bellota;

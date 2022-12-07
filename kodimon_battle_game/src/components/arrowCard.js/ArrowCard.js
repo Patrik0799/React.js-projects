@@ -128,7 +128,7 @@ export default connect(mapStateToProps,
   })(ArrowCard)
 
 const ArrowCardComponent = styled.div `
-    background-color: yellow;
+    //background-color: yellow;
     width: 200px;
     height: 120px;
     text-align:center;

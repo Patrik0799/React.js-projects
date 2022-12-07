@@ -13,7 +13,6 @@ const App = () => {
           <Route path='/battle' element={<BattlePage />} />
         </Routes>
       </Router>
-        
     </div>
   )
 }
