@@ -7,7 +7,7 @@ import BattleMenu from './BattleMenu/BattleMenu';
 import PopUp from './PopUp/PopUp';
 
 import { connect } from "react-redux";
-import { fetchPokemon1, fetchPokemon2 } from '../actions';
+import { fetchPokemon1, fetchPokemon2, resetCounter } from '../actions';
 
 const BattlePage = ({
   pokemon, 
@@ -17,13 +17,17 @@ const BattlePage = ({
   pokemonHP,
   pokemon2HP,
   startPokemonHP,
-  startPokemon2HP
+  startPokemon2HP,
+  resetCounter
   }) =>{
+
+    //const [callLogs, setCallLogs] = useState([{}]);
 
   //ovo je islo u componentDidMount()
   useEffect(()=> {
     fetchPokemon1(Math.floor(Math.random() * (600 - 1) + 1));
     fetchPokemon2(Math.floor(Math.random() * (600 - 1) + 1));
+    resetCounter();
   }, [])
 
   //Ovih par linija je islo u render(){} prije returna
@@ -98,7 +102,7 @@ const mapStateToProps = (state) =>{
   }
 }
 
-export default connect(mapStateToProps, {fetchPokemon1, fetchPokemon2})(BattlePage)
+export default connect(mapStateToProps, {fetchPokemon1, fetchPokemon2, resetCounter})(BattlePage)
 
 const BattlePageComponent = styled.div `
 

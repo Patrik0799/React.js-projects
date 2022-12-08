@@ -61,12 +61,16 @@ const ArrowCard = ({
 
     if(damageDealt < 0){
       damageDealt = 0;
-    }else if(toMissNumber == 1){
-      setMissed(1);
-      damageDealt = 0;
     }
     
-    setMissed(0);
+    if(toMissNumber === 1){
+      setMissed(1);
+      damageDealt = 0;
+    } else {
+      setMissed(0);
+    }
+    
+    
     return damageDealt
     
   }

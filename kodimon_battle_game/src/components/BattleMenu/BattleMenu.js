@@ -1,21 +1,79 @@
 import React from 'react'
 import styled from "styled-components";
 import Button from '../Button/Button';
+import {useNavigate } from "react-router-dom"
+import { connect } from 'react-redux';
+import { fetchPokemon1, fetchPokemon2, initialSetLeftPokemonHP, initialSetRightPokemonHP, resetCounter } from '../../actions';
 
-const BattleMenu = () => {
+const BattleMenu = ({fetchPokemon1,
+                     fetchPokemon2, 
+                     initialSetLeftPokemonHP, 
+                     startPokemonHP, 
+                     initialSetRightPokemonHP, 
+                     startPokemon2HP, 
+                     resetCounter,
+                     pokemonHP,
+                     pokemon2HP
+                     }) => {
+
+  const navigate = useNavigate();
+  
+  const newGame = () =>{
+    fetchPokemon1(Math.floor(Math.random() * (600 - 1) + 1));
+    fetchPokemon2(Math.floor(Math.random() * (600 - 1) + 1));
+    initialSetLeftPokemonHP(startPokemonHP);
+    initialSetRightPokemonHP(startPokemon2HP);
+    resetCounter();
+  }
+
+  const newOpponent = () => {
+    let     randomNum = Math.floor(Math.random() * (2 - 1) + 1)
+    if(pokemonHP < pokemon2HP){
+      fetchPokemon1(Math.floor(Math.random() * (600 - 1) + 1));
+      initialSetLeftPokemonHP(startPokemonHP);
+      initialSetRightPokemonHP(startPokemon2HP);
+      resetCounter();
+    }else if(pokemon2HP < pokemonHP){
+      fetchPokemon2(Math.floor(Math.random() * (600 - 1) + 1));
+      initialSetRightPokemonHP(startPokemon2HP);
+      initialSetLeftPokemonHP(startPokemonHP);
+      resetCounter();
+    }else{
+      if(randomNum == 1){
+        fetchPokemon1(Math.floor(Math.random() * (600 - 1) + 1));
+        initialSetLeftPokemonHP(startPokemonHP);
+        initialSetRightPokemonHP(startPokemon2HP);
+        resetCounter();
+      }else{
+        fetchPokemon2(Math.floor(Math.random() * (600 - 1) + 1));
+        initialSetRightPokemonHP(startPokemon2HP);
+        initialSetLeftPokemonHP(startPokemonHP);
+        resetCounter();
+      }
+    }
+  }
+
   return (
     <BattleMenuComponent>
         <h3 className='battle-text' >Menu</h3>
         <div className='battle-menu-buttons default-border'>
-            <Button className="item-button" children={"Home"}/>
-            <Button className="item-button" children={"New Game"}/>
-            <Button className="item-button" children={"New opponent"}/>
+            <Button onClick={()=>{navigate("/")}}className="item-button" children={"Home"}/>
+            <Button onClick={newGame} className="item-button" children={"New Game"}/>
+            <Button onClick={newOpponent} className="item-button" children={"New opponent"}/>
         </div>
     </BattleMenuComponent>
   )
 }
 
-export default BattleMenu
+  const mapStateToProps = (state) => {
+    return {
+      startPokemonHP: state.startPokemonHP,
+      startPokemon2HP: state.startPokemon2HP,
+      pokemonHP: state.pokemonHP,
+      pokemon2HP: state.pokemon2HP
+    }
+  }
+export default connect(mapStateToProps, {fetchPokemon1, fetchPokemon2, initialSetLeftPokemonHP, initialSetRightPokemonHP, resetCounter})(BattleMenu)
 
 const BattleMenuComponent = styled.div`
 

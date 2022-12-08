@@ -101,3 +101,11 @@ export const setCounter = () => {
     }
 }
 
+export const resetCounter = () => {
+    return {
+        type: "RESET_COUNTER"
+    }
+}
+
+
+

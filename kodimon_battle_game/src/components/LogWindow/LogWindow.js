@@ -20,11 +20,10 @@ const LogWindow = ({rightToleftDMG, leftTorightDMG, LeftPokemonName, RightPokemo
 
       if(direction == 0 && miss == 0){
         copyLogs.push({
-          PokemonWhoAttack: RightPokemonName, //LeftPokemonName
-          PokemonWhoDefends: LeftPokemonName, //RightPokemonName
+          PokemonWhoAttack: RightPokemonName, 
+          PokemonWhoDefends: LeftPokemonName,
           Action: "attacked",
           Text: `for ${rightToleftDMG} dmg.`
-          //DamageDealt: rightToleftDMG //leftTorightDMG
         })
       }else if(miss == 1 && direction == 0){
         copyLogs.push({
@@ -32,7 +31,6 @@ const LogWindow = ({rightToleftDMG, leftTorightDMG, LeftPokemonName, RightPokemo
           PokemonWhoDefends: LeftPokemonName, 
           Action: "MISSED",
           Text: ""
-          //DamageDealt: rightToleftDMG //leftTorightDMG
         })
       }else if(miss == 1 && direction == 1){
         copyLogs.push({
@@ -40,7 +38,6 @@ const LogWindow = ({rightToleftDMG, leftTorightDMG, LeftPokemonName, RightPokemo
           PokemonWhoDefends: RightPokemonName,
           Action: "MISSED",
           Text: ""
-          //DamageDealt: leftTorightDMG //rightToleftDMG
         })
       }else if(pokemonHP == 0){
         copyLogs.push({
@@ -48,7 +45,6 @@ const LogWindow = ({rightToleftDMG, leftTorightDMG, LeftPokemonName, RightPokemo
           PokemonWhoDefends: "", 
           Action: "DIED",
           Text: ""
-          //DamageDealt: rightToleftDMG //leftTorightDMG
         })
       }else if(pokemon2HP == 0){
         copyLogs.push({
@@ -56,16 +52,14 @@ const LogWindow = ({rightToleftDMG, leftTorightDMG, LeftPokemonName, RightPokemo
           PokemonWhoDefends: "",
           Action: "DIED",
           Text: ""
-          //DamageDealt: leftTorightDMG //rightToleftDMG
         })
       }
       else{
         copyLogs.push({
-          PokemonWhoAttack: LeftPokemonName, //RightPokemonName
-          PokemonWhoDefends: RightPokemonName, //LeftPokemonName
+          PokemonWhoAttack: LeftPokemonName, 
+          PokemonWhoDefends: RightPokemonName,
           Action: "attacked",
           Text: `for ${leftTorightDMG} dmg.`
-          //DamageDealt: leftTorightDMG //rightToleftDMG
         })
       }
 
@@ -75,26 +69,23 @@ const LogWindow = ({rightToleftDMG, leftTorightDMG, LeftPokemonName, RightPokemo
     useEffect(()=>{
       if(logAdd > 0){
         addToLogs();
-        //console.log("logAdd value: ", logAdd);
-        console.log("RIGHT TO LEFT DMG: ", rightToleftDMG);
-        console.log("LEFT TO RIGHT DMG: ", leftTorightDMG);
-        console.log("pokemonHP: ", pokemonHP);
-        console.log("pokemon2HP: ", pokemon2HP);
-        //console.log(logs);
       }
-
       if(counter > 9){
-        console.log("AJMOO");
         removeFromLogs();
       }
-
     },[logAdd])
+
+    useEffect(()=>{
+      setLogs([{}]);
+    }, [RightPokemonName, LeftPokemonName])
+
+    console.log(counter);
 
     return (
         <LogsWindowComponent>
             <h3 className='battle-text'>Logs</h3>
             <div className='logs default-border'>
-                {logs.slice(1).map((log, index)=>{
+                {logs.map((log, index)=>{
                     return(
                       <LogMessage
                           key={index} 
@@ -102,12 +93,9 @@ const LogWindow = ({rightToleftDMG, leftTorightDMG, LeftPokemonName, RightPokemo
                           PokemonWhoDefends={log.PokemonWhoDefends}
                           Action={log.Action}
                           Text={log.Text}
-                          //DamageDealt={log.DamageDealt}
                       />
                     )
                 })}
-                {/*<h4>{rightToleftDMG}</h4>
-                <h4>{leftTorightDMG}</h4>*/}
             </div>
         </LogsWindowComponent>
   )
