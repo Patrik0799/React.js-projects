@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
+import HealthBar from '../HealthBar/HealthBar';
 
-const PokemonCard = ({name, image, hp, attack, defence, speed, HP}) => {
+const PokemonCard = ({name, image, hp, attack, defence, speed, newHP, initialHP}) => {
         return (
             <PokemonCardComponent>
                 <div className='pokemon'>
-                    <div>{HP}</div>
-                    <div>HEALTH BAR</div>
+                    {/*<div>{HP}</div>
+                    <div>HEALTH BAR</div>*/}
+                    <HealthBar initialHP = {initialHP} newHP = {newHP}/>
                     <h1>{name}</h1>
                     <img src={image} alt=''/>
                 </div>
@@ -32,7 +34,7 @@ const PokemonCardComponent = styled.div `
     h1 {
         font-size: 17px;
         text-align: center;
-        margin-top:5px;
+        margin-top:10px;
     }
 
     h3 {

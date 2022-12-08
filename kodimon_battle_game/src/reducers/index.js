@@ -9,11 +9,15 @@ import damageReducer2 from "./damageReducer2";
 import logReducer from "./logReducer";
 import missReducer from "./missReducer";
 import counterReducer from "./counterReducer";
+import startPokemonHP from "./startPokemonHP";
+import startPokemon2HP from "./startPokemon2HP";
 
 export default combineReducers({
     pokemon: pokemonReducer,
     pokemon2: pokemonReducer2,
     direction: directionReducer,
+    startPokemonHP: startPokemonHP,
+    startPokemon2HP: startPokemon2HP,
     pokemonHP: pokemonHP,
     pokemon2HP: pokemon2HP,
     rightToleftDMG: damageReducer,
