@@ -8,7 +8,7 @@ import BattleMenu from './BattleMenu/BattleMenu';
 import PopUp from './PopUp/PopUp';
 
 import { connect } from "react-redux";
-import { fetchPokemon1, fetchPokemon2, resetCounter, setFakeLogs} from '../actions';
+import { fetchPokemon1, fetchPokemon2, setFakeLogs} from '../actions';
 
 const BattlePage = ({
   pokemon, 
@@ -19,16 +19,14 @@ const BattlePage = ({
   pokemon2HP,
   startPokemonHP,
   startPokemon2HP,
-  resetCounter,
   setFakeLogs
   }) =>{
 
 useEffect(()=> {
   fetchPokemon1(Math.floor(Math.random() * (600 - 1) + 1));
   fetchPokemon2(Math.floor(Math.random() * (600 - 1) + 1));
-  resetCounter();
   setFakeLogs([]);
-  }, [fetchPokemon1, fetchPokemon2, resetCounter])
+  }, [fetchPokemon1, fetchPokemon2])
 
 if(!pokemon2.name || !pokemon.name){
   return null;
@@ -101,7 +99,7 @@ const mapStateToProps = (state) =>{
   }
 }
 
-export default connect(mapStateToProps, {fetchPokemon1, fetchPokemon2, resetCounter, setFakeLogs})(BattlePage)
+export default connect(mapStateToProps, {fetchPokemon1, fetchPokemon2, setFakeLogs})(BattlePage)
 
 const BattlePageComponent = styled.div `
   .battle-pokemon {

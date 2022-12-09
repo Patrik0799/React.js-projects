@@ -89,24 +89,11 @@ export const setMissed = (value) =>{
         payload: value
     }
 }
-export const setCounter = () => {
-    return {
-        type: "SET_COUNTER"
-    }
-}
-export const resetCounter = () => {
-    return {
-        type: "RESET_COUNTER"
-    }
-}
-
-//TEST
 export const setFakeLogs = (log) => {
     return{
         type: "ADD_TO_LOGS",
         payload: log
     }
 }
-//
 
 
