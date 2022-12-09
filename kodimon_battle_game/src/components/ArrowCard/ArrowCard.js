@@ -4,11 +4,15 @@ import Arrow from "../../assets/arrow.svg";
 import Button from "../Button/Button";
 
 import { connect } from 'react-redux';
-import { setToLeftPokemon, setToRightPokemon, initialSetLeftPokemonHP, newSetLeftPokemonHP, initialSetRightPokemonHP, newSetRightPokemonHP, logTo1, logTo2, initialLeftToRightDMG, initialRightToLeftDMG, setMissed, setCounter } from '../../actions';
+import { setToLeftPokemon, setToRightPokemon, initialSetLeftPokemonHP, newSetLeftPokemonHP, initialSetRightPokemonHP, newSetRightPokemonHP, logTo1, logTo2, initialLeftToRightDMG, initialRightToLeftDMG, setMissed, setFakeLogs } from '../../actions';
 
 const ArrowCard = ({
   LeftPokemonSpeed, 
   RightPokemonSpeed,
+  LeftPokemonName,
+  RightPokemonName,
+  fakeLogs,
+  setFakeLogs,
   LeftPokemonAttack,
   RightPokemonAttack,
   LeftPokemonDefence,
@@ -29,11 +33,10 @@ const ArrowCard = ({
   initialLeftToRightDMG,
   initialRightToLeftDMG,
   miss,
-  setMissed,
-  setCounter,
-  counter
+  setMissed
   }) => {
 
+  const [disable, setDisable] = useState(false);
 
   useEffect(() =>{
 
@@ -69,40 +72,77 @@ const ArrowCard = ({
     } else {
       setMissed(0);
     }
-    
-    
+  
     return damageDealt
     
   }
 
-  {/*LIJEVI NAPADA DESNOM*/}
-  const RightAttacksLeft = () => {
+  const disableButton = () =>{
+    setDisable(true);
+    setTimeout(()=>{setDisable(false)}, 1000);
+  }
+
+  const addToFakeLogs = (attackName, defenceName, damage, health) =>{
+
+    const copyFakeLogs = fakeLogs;
+
+    if(miss === 1 && damage === 0){
+      copyFakeLogs.push({
+        PokemonWhoAttack: attackName, 
+        PokemonWhoDefends: defenceName,
+        Action: "MISSED",
+        Text: ""
+      })
+    }
+    else if(damage > 0){
+      copyFakeLogs.push({
+        PokemonWhoAttack: attackName, 
+        PokemonWhoDefends: defenceName,
+        Action: "attacked",
+        Text: `for ${damage} dmg.`
+      })
+    }
+    else{
+      copyFakeLogs.push({
+        PokemonWhoAttack: attackName, 
+        PokemonWhoDefends: defenceName,
+        Action: "attacked",
+        Text: `for ${damage} dmg.`
+      })
+    }
     
+    setFakeLogs(copyFakeLogs);
+
+  }
+
+  const RightAttacksLeft = () => {
+    disableButton();
+
     const damageDealtToLeft = damageCalculator(RightPokemonAttack, LeftPokemonDefence);
+
+    addToFakeLogs(RightPokemonName, LeftPokemonName, damageDealtToLeft, pokemonHP);
+
     newSetLeftPokemonHP(damageDealtToLeft);
     setToRightPokemon();
     logTo1(2);
-    setCounter();
-    //console.log(damageDealtToLeft);
   }
 
-  {/*DESNI NAPADA LIJEVOG*/}
   const LeftAttacksRight = () => {
-
+    disableButton();
+    
     const damageDealtToRight = damageCalculator(LeftPokemonAttack, RightPokemonDefence);
+    
+    addToFakeLogs(LeftPokemonName,RightPokemonName, damageDealtToRight, pokemon2HP);
+
     newSetRightPokemonHP(damageDealtToRight);
     setToLeftPokemon();
     logTo2(3);
-    setCounter();
-    //console.log(damageDealtToRight);
   }
 
   return (
     <ArrowCardComponent>
-        {/*<h4>LEFT: {pokemonHP}</h4>
-        <h4>RIGHT: {pokemon2HP}</h4>*/}
-        <img className={`${direction==0 ? "arrow-left" : "arrow-right"}`} src={Arrow} alt=""/>
-        <Button children={"Attack"} onClick = {direction == 0 ? RightAttacksLeft : LeftAttacksRight}/>
+        <img className={`${direction===0 ? "arrow-left" : "arrow-right"}`} src={Arrow} alt=""/>
+        <Button children={"Attack"} onClick = {direction == 0 ? RightAttacksLeft : LeftAttacksRight} disabled={disable}/>
     </ArrowCardComponent>
   )
 }
@@ -113,11 +153,12 @@ const ArrowCard = ({
       pokemonHP: state.pokemonHP,
       pokemon2HP: state.pokemon2HP,
       miss: state.miss,
-      counter: state.counter
+      fakeLogs: state.logs
     }
   } 
-export default connect(mapStateToProps,
-   {setToLeftPokemon, 
+
+  export default connect(mapStateToProps, {
+    setToLeftPokemon, 
     setToRightPokemon, 
     initialSetLeftPokemonHP, 
     newSetLeftPokemonHP, 
@@ -128,11 +169,10 @@ export default connect(mapStateToProps,
     initialLeftToRightDMG, 
     initialRightToLeftDMG,
     setMissed,
-    setCounter
+    setFakeLogs
   })(ArrowCard)
 
 const ArrowCardComponent = styled.div `
-    //background-color: yellow;
     width: 200px;
     height: 120px;
     text-align:center;
@@ -142,7 +182,6 @@ const ArrowCardComponent = styled.div `
       padding-bottom: 20px;
       padding-top:20px
     }
-
     .arrow-right{
       transform: rotate(180deg);
       padding-bottom: 20px;

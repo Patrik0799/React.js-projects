@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const LogMessage = ({PokemonWhoAttack, PokemonWhoDefends, DamageDealt, Action, Text}) => {
+const LogMessage = ({PokemonWhoAttack, PokemonWhoDefends, Action, Text}) => {
   return (
     <LogMessageComponent>
-        <h4>{PokemonWhoAttack} {Action} {PokemonWhoDefends} {Text}{/*for {DamageDealt} dmg.*/}</h4>
+        <h4>{PokemonWhoAttack} {Action} {PokemonWhoDefends} {Text}</h4>
     </LogMessageComponent>
   )
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
 
-const Button = ({children, type, onClick}) => {
+const Button = ({children, onClick, disabled}) => {
   return (
-    <ButtonComponent onClick={onClick} type={type}>
+    <ButtonComponent onClick={onClick} disabled={disabled}>
         {children}
     </ButtonComponent>
   )
@@ -21,4 +21,5 @@ const ButtonComponent = styled.button`
   height: 50px;
   cursor: pointer;
   margin-bottom: 10px;
+  opacity: ${props=>props.disabled ? "30%" : "100%"};
 `

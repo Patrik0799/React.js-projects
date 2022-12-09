@@ -20,35 +20,34 @@ const HealthBar = ({initialHP, newHP}) => {
         if(percentageHP >= 50){
             setColor("#62FF84");
             setBorderColor("#079325");
-        }else if(percentageHP < 50 && percentageHP > 30){
+        }
+        else if(percentageHP < 50 && percentageHP > 30){
             setColor("#FFCC00");
             setBorderColor("#FFA500")
-        }else{
+        }
+        else{
             setColor("#FF7575");
             setBorderColor("#FF0000");
         }
-
 
         setPercentage(percentageHP);
         setWidth(percentageHP/100 * 230);
     }
 
-  return (
-    <HealthBarComponent WID={newwidth} colorMain={color} colorBorder={borderColor}>
-        <h3>{percentage} %</h3>
-        <div className='progress'>
-            <div className='progress-done'>
-                
+    return (
+        <HealthBarComponent WID={newwidth} colorMain={color} colorBorder={borderColor}>
+            <h3>{percentage} %</h3>
+            <div className='progress'>
+                <div className='progress-done'>    
+                </div>
             </div>
-        </div>
-    </HealthBarComponent>
+        </HealthBarComponent>
   )
 }
 
 export default HealthBar
 
 const HealthBarComponent = styled.div`
-
 display: flex;
 flex-direction:column;
 justify-content:center;
@@ -64,12 +63,10 @@ h3{
     height: 12px;
     width: 230px;
 }
-
 .progress-done {
     background-color: ${(props) => props.colorMain};
     border-radius: 20px;
     height: 100%;
     width: ${(props) => props.WID}px;
 }
-
 `
