@@ -12,6 +12,7 @@ const HealthBar = ({initialHP, newHP}) => {
         percentageHealth(initialHP, newHP);
     })
 
+    //Function that calculates percentage left of given HP 
     const percentageHealth = (initialHP, newHP) =>{
         const initialhp = initialHP;
         const newhp = newHP;

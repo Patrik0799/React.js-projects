@@ -15,6 +15,7 @@ const LogWindow = ({fakeLogs}) => {
             <h3 className='battle-text'>Logs</h3>
             <div className='logs default-border'>
                {fakeLogs?.map((log, index)=>{
+                //Mapping through every log that is given by the addToFakeLogs() function in the ArrowCard component.
                     return(
                       <LogMessage
                           key={index} 

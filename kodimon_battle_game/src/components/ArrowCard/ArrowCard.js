@@ -56,6 +56,8 @@ const ArrowCard = ({
     
   }, [])
 
+  //For calculating Pokemon to Pokemon damage, including the chance to miss.
+  //If the Pokemons defence is greater than 100, then the Pokemon attacking deals 0 damage.
   const damageCalculator = (attack, defence) =>{
     const ATT = attack/2;
     const DEF = defence;
@@ -82,7 +84,8 @@ const ArrowCard = ({
     setTimeout(()=>{setDisable(false)}, 1000);
   }
 
-  const addToFakeLogs = (attackName, defenceName, damage, health) =>{
+  //Function that adds messages to logs depending on who attacks.
+  const addToFakeLogs = (attackName, defenceName, damage) =>{
 
     const copyFakeLogs = fakeLogs;
 
@@ -115,6 +118,8 @@ const ArrowCard = ({
 
   }
 
+  //Depending on where the arrow is pointing, either RightAttacksLeft() is called or LeftAttacksRight(), on button click.
+  //Arrow is pointing to the one being attacked
   const RightAttacksLeft = () => {
     disableButton();
 

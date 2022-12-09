@@ -19,6 +19,7 @@ const BattleMenu = ({
 
   const navigate = useNavigate();
   
+  //Logic when New Game or New Opponent button is clicked, Menu button is just navigating back to "/".
   const newGame = () =>{
     fetchPokemon1(Math.floor(Math.random() * (600 - 1) + 1));
     fetchPokemon2(Math.floor(Math.random() * (600 - 1) + 1));
